@@ -6,13 +6,16 @@ type TypeCard = {
   type: string
 }
 
-const setGridAction = (payload: PayloadAction<number>) => ({
-  type: 'SET_GRID',
+const generateGridAction = (payload: number) => ({
+  type: 'GENERATE_GRID',
   payload,
 })
 const compareCardAction = (payload: Array<TypeCard>) => ({
   type: 'COMPARE_CARD',
   payload,
 })
-
-export { setGridAction, compareCardAction }
+const flipCardAction = (payload: TypeCard) => ({
+  type: 'FLIP_CARD',
+  payload,
+})
+export { generateGridAction, compareCardAction, flipCardAction }

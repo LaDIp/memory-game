@@ -1,3 +1,3 @@
-import { setGridAction, compareCardAction } from './gridActions'
+import { generateGridAction, compareCardAction } from './gridActions'
 
-export { setGridAction, compareCardAction }
+export { generateGridAction, compareCardAction }

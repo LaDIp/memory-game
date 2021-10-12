@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { MouseEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
+import { flipCardAction } from '../../redux/actions/gridActions'
 import type { RootState } from '../../redux/store'
 import style from './style.module.scss'
 
@@ -11,18 +12,25 @@ interface TypeCard {
 }
 
 interface CardProps {
-  id: string
   card: TypeCard
-  onClick: (id: string, card: TypeCard) => void
+  onClick: (card: TypeCard) => void
 }
 
-function Card({ id, card, onClick }: CardProps) {
+function Card({ card, onClick }: CardProps) {
+  const dispatch = useAppDispatch()
   const handleClick = (event: MouseEvent<HTMLElement>) => {
-    event.currentTarget.classList.add(style.card_flip)
-    onClick(id, card)
+    if (card.type === 'hide') {
+      dispatch(flipCardAction(card))
+      onClick(card)
+    }
   }
   return (
-    <div className={style.card} onClick={handleClick}>
+    <div
+      className={classNames(style.card, {
+        [style.card_flip]: card.type !== 'hide',
+      })}
+      onClick={handleClick}
+    >
       <span className={style.card__front}></span>
       <span
         className={classNames(style.card__back, {

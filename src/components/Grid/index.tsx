@@ -15,7 +15,7 @@ function Grid() {
   const [flippedCards, setFlippedCards] = React.useState<Array<TypeCard>>([])
   const grid = useAppSelector((state: RootState) => state.grid)
   const dispacth = useAppDispatch()
-  const cardOnClick = (id: string, card: TypeCard) => {
+  const cardOnClick = (card: TypeCard) => {
     flippedCards.push(card)
     setFlippedCards(flippedCards)
     if (flippedCards.length === 2) {
@@ -31,7 +31,6 @@ function Grid() {
           {col.map((row, rowIndex) => (
             <Card
               key={`${colIndex}_${rowIndex}`}
-              id={row.id}
               card={row}
               onClick={cardOnClick}
             />

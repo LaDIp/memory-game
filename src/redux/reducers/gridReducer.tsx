@@ -30,22 +30,46 @@ const defaultState: gridState = [
 const gridReducer = (state = defaultState, action: AnyAction): gridState => {
   console.log(action)
   switch (action.type) {
-    case 'SET_GRID':
-      return state
+    case 'GENERATE_GRID':
+      let values: Array<number> = Array((action.payload * action.payload) / 2)
+        .fill(0)
+        .map((item, index) => index)
+      values = values.concat(values)
+      values.sort(() => Math.random() - 0.5)
+      console.log(values)
+      let grid: gridState = []
+      for (let i = 0; i < action.payload; i++) {
+        let row = []
+        for (let j = 0; j < action.payload; j++) {
+          row.push({
+            id: `${i}_${j}`,
+            value: values[0],
+            type: 'hide',
+          })
+          values.shift()
+        }
+        grid.push(row)
+      }
+      console.log(grid)
+      return grid
     case 'COMPARE_CARD':
-      console.log(action.payload)
-      if (action.payload[0].value === action.payload[1].value) {
-        const newState = state.map((row) =>
-          row.map((card) => {
+      return state.map((row) =>
+        row.map((card) => {
+          if (action.payload[0].value === action.payload[1].value) {
             if (card.id === action.payload[0].id) card.type = 'open'
             if (card.id === action.payload[1].id) card.type = 'open'
-            return card
-          }),
-        )
-        console.log(newState)
-      }
-
-      return state
+          }
+          if (card.type === 'flip') card.type = 'hide'
+          return card
+        }),
+      )
+    case 'FLIP_CARD':
+      return state.map((row) =>
+        row.map((card) => {
+          if (card.id === action.payload.id) card.type = 'flip'
+          return card
+        }),
+      )
     default:
       return state
   }

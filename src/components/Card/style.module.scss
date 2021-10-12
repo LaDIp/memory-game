@@ -31,6 +31,7 @@
   &__back {
     background-color: $orange;
     transform: rotateX(180deg);
+    transition: background-color 0s 0.4s;
     &_open {
       background-color: $light-gray;
     }
