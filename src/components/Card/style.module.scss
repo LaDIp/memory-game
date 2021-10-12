@@ -1,0 +1,41 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_anims.scss';
+
+.card {
+  position: relative;
+  box-sizing: border-box;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  color: $white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  &_flip {
+    transform: rotateX(180deg);
+  }
+  &__front,
+  &__back {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  &__back {
+    background-color: $orange;
+    transform: rotateX(180deg);
+    &_open {
+      background-color: $light-gray;
+    }
+  }
+  &__front {
+    background-color: $dark-gray;
+  }
+}

@@ -1,7 +1,12 @@
 import React from 'react'
+import { Grid } from './components'
 
 function App() {
-  return <></>
+  return (
+    <>
+      <Grid />
+    </>
+  )
 }
 
 export default App
