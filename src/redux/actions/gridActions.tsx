@@ -18,4 +18,14 @@ const flipCardAction = (payload: TypeCard) => ({
   type: 'FLIP_CARD',
   payload,
 })
-export { generateGridAction, compareCardAction, flipCardAction }
+
+const unflipCardAction = (payload: TypeCard) => ({
+  type: 'UNFLIP_CARD',
+  payload,
+})
+export {
+  generateGridAction,
+  compareCardAction,
+  flipCardAction,
+  unflipCardAction,
+}
