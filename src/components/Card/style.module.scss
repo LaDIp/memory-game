@@ -3,9 +3,8 @@
 
 .card {
   position: relative;
-  box-sizing: border-box;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   border-radius: 50%;
   color: $white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -18,6 +17,9 @@
   }
   &__front,
   &__back {
+    box-sizing: border-box;
+
+    border: 0.2em solid $white;
     position: absolute;
     display: flex;
     justify-content: center;

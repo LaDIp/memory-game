@@ -1,6 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit'
-import { default as gridReducer } from '../reducers'
-
 type TypeCard = {
   value: number
   type: string
@@ -9,6 +6,9 @@ type TypeCard = {
 const generateGridAction = (payload: number) => ({
   type: 'GENERATE_GRID',
   payload,
+})
+const resetGridAction = () => ({
+  type: 'RESET_GRID',
 })
 const compareCardAction = (payload: Array<TypeCard>) => ({
   type: 'COMPARE_CARD',
@@ -19,13 +19,9 @@ const flipCardAction = (payload: TypeCard) => ({
   payload,
 })
 
-const unflipCardAction = (payload: TypeCard) => ({
-  type: 'UNFLIP_CARD',
-  payload,
-})
 export {
   generateGridAction,
   compareCardAction,
   flipCardAction,
-  unflipCardAction,
+  resetGridAction,
 }

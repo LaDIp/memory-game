@@ -1,12 +1,9 @@
 import React from 'react'
 import style from './style.module.scss'
-import { Card } from '../index'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import type { RootState } from '../../redux/store'
-import {
-  compareCardAction,
-  unflipCardAction,
-} from '../../redux/actions/gridActions'
+import { Card } from '..'
+import { useAppDispatch } from '../../hooks'
+import { compareCardAction } from '../../redux/actions/gridActions'
+import { incMovesAction } from '../../redux/actions/gameActions'
 
 interface TypeCard {
   id: string
@@ -18,10 +15,11 @@ interface GridProps {
   grid: Array<Array<TypeCard>>
 }
 
-function Grid({ grid }: GridProps) {
+const Grid: React.FC<GridProps> = ({ grid }) => {
   const [flippedCards, setFlippedCards] = React.useState<Array<TypeCard>>([])
   const dispacth = useAppDispatch()
   const cardOnClick = (card: TypeCard) => {
+    dispacth(incMovesAction())
     flippedCards.push(card)
     setFlippedCards(flippedCards)
     if (flippedCards.length === 2) {
@@ -34,7 +32,7 @@ function Grid({ grid }: GridProps) {
   }
 
   return (
-    <div className=''>
+    <div className={style.grid}>
       {grid.map((col, colIndex) => (
         <div key={colIndex} className={style.grid__row}>
           {col.map((row, rowIndex) => (

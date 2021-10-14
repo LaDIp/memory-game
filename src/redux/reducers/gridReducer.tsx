@@ -15,18 +15,19 @@ const gridReducer = (state = defaultState, action: AnyAction): gridState => {
   console.log(action)
   switch (action.type) {
     case 'GENERATE_GRID':
-      let values: Array<number> = Array((action.payload * action.payload) / 2)
+      const size = +action.payload.gridSize
+      let values: Array<number> = Array((size * size) / 2)
         .fill(0)
         .map((item, index) => index)
       values = values.concat(values)
       values.sort(() => Math.random() - 0.5)
       console.log(values)
       let grid: gridState = []
-      for (let i = 0; i < action.payload; i++) {
+      for (let i = 0; i < size; i++) {
         let row = []
-        for (let j = 0; j < action.payload; j++) {
+        for (let j = 0; j < size; j++) {
           row.push({
-            id: `${i}_${j}`,
+            id: Math.random().toString(),
             value: values[0],
             type: 'hide',
           })
@@ -36,6 +37,8 @@ const gridReducer = (state = defaultState, action: AnyAction): gridState => {
       }
       console.log(grid)
       return grid
+    case 'RESET_GRID':
+      return defaultState
     case 'COMPARE_CARD':
       console.log(action.payload)
       return state.map((row) =>
