@@ -3,7 +3,7 @@ type TypeCard = {
   type: string
 }
 
-const generateGridAction = (payload: number) => ({
+const generateGridAction = (payload: Object) => ({
   type: 'GENERATE_GRID',
   payload,
 })

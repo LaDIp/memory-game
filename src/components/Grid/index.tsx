@@ -13,22 +13,12 @@ interface TypeCard {
 
 interface GridProps {
   grid: Array<Array<TypeCard>>
+  onClick: (card: TypeCard) => void
 }
 
-const Grid: React.FC<GridProps> = ({ grid }) => {
-  const [flippedCards, setFlippedCards] = React.useState<Array<TypeCard>>([])
-  const dispacth = useAppDispatch()
+const Grid: React.FC<GridProps> = ({ grid, onClick }) => {
   const cardOnClick = (card: TypeCard) => {
-    dispacth(incMovesAction())
-    flippedCards.push(card)
-    setFlippedCards(flippedCards)
-    if (flippedCards.length === 2) {
-      dispacth(compareCardAction(flippedCards))
-    }
-    if (flippedCards.length === 3) {
-      dispacth(compareCardAction(flippedCards))
-      setFlippedCards(flippedCards.slice(-1))
-    }
+    onClick(card)
   }
 
   return (

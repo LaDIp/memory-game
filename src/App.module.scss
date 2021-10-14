@@ -1,9 +1,33 @@
-@import './styles/global';
+@import './styles/_global';
+@import './styles/_colors';
 
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-right: auto;
+  font-size: 2.5em;
+  font-weight: 900;
+}
+
+.button {
+  @include button;
+  border: 0;
+  &_restart {
+    background-color: $orange;
+  }
+  &_newgame {
+    margin-left: 1em;
+    color: $dark-gray;
+  }
 }
 
 .plate {

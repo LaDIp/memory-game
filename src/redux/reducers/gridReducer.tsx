@@ -15,6 +15,7 @@ const gridReducer = (state = defaultState, action: AnyAction): gridState => {
   console.log(action)
   switch (action.type) {
     case 'GENERATE_GRID':
+      const typeCard = action.payload.typeCards
       const size = +action.payload.gridSize
       let values: Array<number> = Array((size * size) / 2)
         .fill(0)

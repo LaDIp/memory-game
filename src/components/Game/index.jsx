@@ -1,8 +1,13 @@
 import React from 'react'
 import style from './style.module.scss'
-import { Grid } from '..'
+import { GameStat, Grid } from '..'
 import { useAppDispatch } from '../../hooks'
-import { incTimeAction } from '../../redux/actions/gameActions'
+import {
+  endGameAction,
+  incMovesAction,
+  incTimeAction,
+} from '../../redux/actions/gameActions'
+import { compareCardAction } from '../../redux/actions/gridActions'
 
 interface GameProps {
   game: Object;
@@ -10,35 +15,35 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({ game, grid }) => {
-  const dispatch = useAppDispatch()
-
-  React.useEffect(() => {
-    let time = 0
-    if (game.isStart) {
-      time = setInterval(() => dispatch(incTimeAction()), 1000)
-    } else {
-      return () => clearInterval(time)
+  const [flippedCards, setFlippedCards] = React.useState([])
+  const [openedCard, setOpenedCard] = React.useState(0)
+  const dispacth = useAppDispatch()
+  const handleGridClick = (card) => {
+    dispacth(incMovesAction())
+    flippedCards.push(card)
+    setFlippedCards(flippedCards)
+    if (flippedCards.length === 2) {
+      dispacth(compareCardAction(flippedCards))
+      flippedCards.forEach((card) => {
+        if (card.type === 'open')
+          setOpenedCard((openedCard) => {
+            if (openedCard + 1 === game.size) {
+              console.log(openedCard)
+              dispacth(endGameAction())
+            }
+            return openedCard + 1
+          })
+      })
     }
-  }, [game.isStart])
-
+    if (flippedCards.length === 3) {
+      dispacth(compareCardAction(flippedCards))
+      setFlippedCards(flippedCards.slice(-1))
+    }
+  }
   return (
     <div className={style.game}>
-      <Grid grid={grid} />
-      <div className={style.game__stat}>
-        <div className={style.plate}>
-          <p className={style.plate__title}>Moves</p>
-          <p className={style.plate__text}>{game.moves}</p>
-        </div>
-        <div className={style.plate}>
-          <p className={style.plate__title}>Time</p>
-          <p className={style.plate__text}>
-            {Math.floor((game.time % 3600) / 60)}:
-            {Math.floor((game.time % 3600) % 60) < 10
-              ? `0${Math.floor((game.time % 3600) % 60)}`
-              : Math.floor((game.time % 3600) % 60)}
-          </p>
-        </div>
-      </div>
+      <Grid grid={grid} onClick={handleGridClick} />
+      <GameStat game={game} />
     </div>
   )
 }
