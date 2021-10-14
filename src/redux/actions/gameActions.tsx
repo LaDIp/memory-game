@@ -6,9 +6,12 @@ const startGameAction = (payload: Object) => ({
 const endGameAction = () => ({
   type: 'END_GAME',
 })
+const restartGameAction = () => ({
+  type: 'RESTART_GAME',
+})
 
-const openCardAction = () => ({
-  type: 'OPEN_CARD',
+const newGameAction = () => ({
+  type: 'NEW_GAME',
 })
 
 const incMovesAction = () => ({
@@ -18,4 +21,11 @@ const incTimeAction = () => ({
   type: 'INC_TIME',
 })
 
-export { startGameAction, incMovesAction, incTimeAction, endGameAction }
+export {
+  startGameAction,
+  incMovesAction,
+  incTimeAction,
+  endGameAction,
+  restartGameAction,
+  newGameAction,
+}

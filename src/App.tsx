@@ -5,7 +5,12 @@ import { generateGridAction } from './redux/actions/gridActions'
 import { RootState } from './redux/store'
 import style from './App.module.scss'
 import classNames from 'classnames'
-import { startGameAction } from './redux/actions/gameActions'
+import {
+  endGameAction,
+  newGameAction,
+  restartGameAction,
+  startGameAction,
+} from './redux/actions/gameActions'
 
 function App() {
   const grid = useAppSelector((state: RootState) => state.grid)
@@ -13,6 +18,7 @@ function App() {
   const dispatch = useAppDispatch()
 
   const handleRestart = () => {
+    dispatch(restartGameAction())
     dispatch(
       generateGridAction({
         typeCards: game.typeCards,
@@ -27,6 +33,10 @@ function App() {
     )
   }
 
+  const handleNewGame = () => {
+    dispatch(newGameAction())
+  }
+
   return (
     <>
       <header className={style.header}>
@@ -39,14 +49,21 @@ function App() {
             >
               Restart
             </button>
-            <button className={classNames(style.button, style.button_newgame)}>
+            <button
+              className={classNames(style.button, style.button_newgame)}
+              onClick={handleNewGame}
+            >
               New Game
             </button>
           </>
         )}
       </header>
       <main className={style.main}>
-        {game.isStart ? <Game game={game} grid={grid} /> : <StartForm />}
+        {game.isStart || game.isEnd ? (
+          <Game game={game} grid={grid} />
+        ) : (
+          <StartForm />
+        )}
       </main>
     </>
   )

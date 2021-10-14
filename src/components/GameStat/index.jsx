@@ -8,14 +8,18 @@ interface GameStatProps {
 }
 
 const GameStat: React.FC<GameStatProps> = ({ game }) => {
-  const [time, setTime] = React.useState(game.time)
+  const [time, setTime] = React.useState(0)
   React.useEffect(() => {
     let interval = setInterval(() => setTime((time) => time + 1), 1000)
-    if (game.isEnd) {
-      return clearInterval(interval)
+    if (game.isEnd) clearInterval(interval)
+    return () => {
+      clearInterval(interval)
     }
-    return () => clearInterval(interval)
-  }, [game.isEnd, game.isStart])
+  }, [game.isEnd])
+
+  React.useEffect(() => {
+    setTime(0)
+  }, [game.restart])
 
   return (
     <div className={style.stat}>

@@ -12,7 +12,6 @@ type gridState = Array<Array<TypeCard>>
 const defaultState: gridState = []
 
 const gridReducer = (state = defaultState, action: AnyAction): gridState => {
-  console.log(action)
   switch (action.type) {
     case 'GENERATE_GRID':
       const typeCard = action.payload.typeCards
