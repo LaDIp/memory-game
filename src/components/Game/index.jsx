@@ -28,8 +28,8 @@ const Game: React.FC<GameProps> = ({ game, grid }) => {
         if (card.type === 'open')
           setOpenedCard((openedCard) => {
             if (openedCard + 1 === game.size) {
-              console.log(openedCard)
               dispacth(endGameAction())
+              return 0
             }
             return openedCard + 1
           })
