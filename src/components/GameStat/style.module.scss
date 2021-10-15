@@ -1,25 +1,27 @@
 @import '../../styles/_global';
 
 .stat {
-  padding-top: 1em;
-  margin-left: -1em;
-  margin-right: -1em;
+  width: 100%;
+  padding-top: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
   display: flex;
 }
 
 .plate {
   @include plate;
-  width: calc(50% - 2em);
-  margin-left: 1em;
-  margin-right: 1em;
-  padding: 1em;
+  width: calc(50% - 2rem);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
   text-align: center;
   &__title {
+    font-size: 1rem;
     color: $gray;
   }
   &__text {
     font-weight: 900;
-    font-size: 1.5em;
+    font-size: 1.2rem;
     color: $dark-gray;
   }
 }

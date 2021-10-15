@@ -8,6 +8,7 @@ import {
   incTimeAction,
 } from '../../redux/actions/gameActions'
 import { compareCardAction } from '../../redux/actions/gridActions'
+import classNames from 'classnames'
 
 interface GameProps {
   game: Object;
@@ -41,7 +42,13 @@ const Game: React.FC<GameProps> = ({ game, grid }) => {
     }
   }
   return (
-    <div className={style.game}>
+    <div
+      className={classNames(style.game, {
+        [style.game_4]: game.size === 16,
+        [style.game_6]: game.size === 36,
+        [style.game_8]: game.size === 64,
+      })}
+    >
       <Grid grid={grid} onClick={handleGridClick} />
       <GameStat game={game} />
     </div>

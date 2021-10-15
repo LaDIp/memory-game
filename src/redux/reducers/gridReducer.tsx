@@ -3,7 +3,7 @@ import { Card } from '../../components'
 
 interface TypeCard {
   id: string
-  value: number
+  value: number | string
   type: string
 }
 
@@ -11,14 +11,52 @@ type gridState = Array<Array<TypeCard>>
 
 const defaultState: gridState = []
 
+const icons: Array<string> = [
+  'favorite_border',
+  'schedule',
+  'lightbulb',
+  'sports_soccer',
+  'grade',
+  'pets',
+  'flutter_dash',
+  'offline_bolt',
+  'settings',
+  'build',
+  'sports_esports',
+  'add_circle_outline',
+  'shield',
+  'notifications',
+  'public',
+  'sentiment_satisfied',
+  'straighten',
+  'back_hand',
+  'workspace_premium',
+  'catching_pokemon',
+  'sports_basketball',
+  'sports_motorsports',
+  'cookie',
+  'party_mode',
+  'ice_skating',
+  'hive',
+  'edit', //27
+  'palette',
+  'remove_red_eye',
+  'audiotrack',
+  'phone',
+  'vpn_key', //32
+]
+
 const gridReducer = (state = defaultState, action: AnyAction): gridState => {
   switch (action.type) {
     case 'GENERATE_GRID':
       const typeCard = action.payload.typeCards
       const size = +action.payload.gridSize
-      let values: Array<number> = Array((size * size) / 2)
-        .fill(0)
-        .map((item, index) => index)
+      let values: Array<number | string> = Array((size * size) / 2).fill(0)
+      if (typeCard === 'Numbers') values = values.map((item, index) => index)
+      if (typeCard === 'Icons') {
+        values.sort(() => Math.random() - 0.5)
+        values = values.map((item, index) => icons[index])
+      }
       values = values.concat(values)
       values.sort(() => Math.random() - 0.5)
       console.log(values)

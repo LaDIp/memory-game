@@ -33,9 +33,15 @@ function Card({ card, onClick }: CardProps) {
     >
       <span className={style.card__front}></span>
       <span
-        className={classNames(style.card__back, {
-          [style.card__back_open]: card.type === 'open',
-        })}
+        className={classNames(
+          style.card__back,
+
+          {
+            [style.card__back_open]: card.type === 'open',
+            'material-icons material-icons-outlined':
+              typeof card.value === 'string',
+          },
+        )}
       >
         {card.value}
       </span>
