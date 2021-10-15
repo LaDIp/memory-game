@@ -39,32 +39,34 @@ function App() {
 
   return (
     <>
-      <header className={style.header}>
-        <span className={style.logo}>memory</span>
-        {game.isStart && (
-          <>
-            <button
-              className={classNames(style.button, style.button_restart)}
-              onClick={handleRestart}
-            >
-              Restart
-            </button>
-            <button
-              className={classNames(style.button, style.button_newgame)}
-              onClick={handleNewGame}
-            >
-              New Game
-            </button>
-          </>
-        )}
-      </header>
-      <main className={style.main}>
-        {game.isStart || game.isEnd ? (
-          <Game game={game} grid={grid} />
-        ) : (
-          <StartForm />
-        )}
-      </main>
+      <div className={style.wrapper}>
+        <header className={style.header}>
+          <span className={style.logo}>memory</span>
+          {game.isStart && (
+            <>
+              <button
+                className={classNames(style.button, style.button_restart)}
+                onClick={handleRestart}
+              >
+                Restart
+              </button>
+              <button
+                className={classNames(style.button, style.button_newgame)}
+                onClick={handleNewGame}
+              >
+                New Game
+              </button>
+            </>
+          )}
+        </header>
+        <main className={style.main}>
+          {game.isStart || game.isEnd ? (
+            <Game game={game} grid={grid} />
+          ) : (
+            <StartForm />
+          )}
+        </main>
+      </div>
     </>
   )
 }
