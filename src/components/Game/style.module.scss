@@ -1,3 +1,5 @@
+@import '../../styles/_colors';
+
 .game {
   height: 100%;
   display: flex;
@@ -14,6 +16,21 @@
   &_8 {
     font-size: 13px;
   }
+}
+
+.gameover {
+  box-sizing: border-box;
+  top: 50%;
+  right: 50%;
+  position: absolute;
+  transform: translate(50%, 50%);
+  background: $orange;
+  color: $white;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 @media screen and (max-width: 768px) {
