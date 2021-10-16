@@ -46,7 +46,6 @@ const Game: React.FC<GameProps> = ({ game, grid }) => {
     >
       <Grid grid={grid} onClick={handleGridClick} />
       <GameStat game={game} />
-      {game.isEnd && <span className={style.gameover}>GAME OVER</span>}
     </div>
   )
 }

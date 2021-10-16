@@ -54,11 +54,8 @@ function App() {
           )}
         </header>
         <main className={style.main}>
-          {game.isStart || game.isEnd ? (
-            <Game game={game} grid={grid} />
-          ) : (
-            <StartForm />
-          )}
+          {game.isStart ? <Game game={game} grid={grid} /> : <StartForm />}
+          {game.isEnd && <span className={style.gameover}>GAME OVER</span>}
         </main>
       </div>
     </>
