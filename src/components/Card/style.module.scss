@@ -3,12 +3,11 @@
 
 .card {
   position: relative;
-  width: 3em;
-  height: 3em;
+  width: 4.5em;
+  height: 4.5em;
   border-radius: 50%;
   color: $white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 1.5em;
   cursor: pointer;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -18,7 +17,7 @@
   &__front,
   &__back {
     box-sizing: border-box;
-
+    font-size: 1.5em;
     border: 0.2em solid $white;
     position: absolute;
     display: flex;
