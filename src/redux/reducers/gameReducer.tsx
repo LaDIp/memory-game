@@ -1,50 +1,35 @@
-import { AnyAction } from 'redux'
-
-interface gameState {
-  isStart: boolean
-  isEnd: boolean
-  restart: number
-  typeCards: string
-  size: number
-  moves: number
-  openedCard: number
-  time: number
-}
+import { gameState, GameActionTypes, GameAction } from '../types/gameTypes'
 
 const defaultState: gameState = {
   isStart: false,
   isEnd: false,
   restart: 0,
   typeCards: '',
-  size: 0,
+  size: 4,
   moves: 0,
   openedCard: 0,
-  time: 0,
 }
 
-const gameReducer = (state = defaultState, action: AnyAction): gameState => {
+const gameReducer = (state = defaultState, action: GameAction): gameState => {
   switch (action.type) {
-    case 'START_GAME':
+    case GameActionTypes.START_GAME:
       return {
         ...state,
         isStart: true,
         isEnd: false,
         typeCards: action.payload.typeCards,
-        size: Number(action.payload.gridSize) * Number(action.payload.gridSize),
+        size: Number(action.payload.size) * Number(action.payload.size),
         moves: 0,
-        time: 0,
         openedCard: 0,
       }
-    case 'END_GAME':
+    case GameActionTypes.END_GAME:
       return { ...state, isEnd: true }
-    case 'NEW_GAME':
+    case GameActionTypes.NEW_GAME:
       return defaultState
-    case 'RESTART_GAME':
+    case GameActionTypes.RESTART_GAME:
       return { ...state, restart: state.restart + 1 }
-    case 'INC_MOVES':
+    case GameActionTypes.INC_MOVES:
       return { ...state, moves: state.moves + 1 }
-    case 'INC_TIME':
-      return { ...state, time: state.time + 1 }
     default:
       return state
   }

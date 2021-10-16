@@ -1,23 +1,14 @@
 import React from 'react'
 import style from './style.module.scss'
 import { Card } from '..'
-import { useAppDispatch } from '../../hooks'
-import { compareCardAction } from '../../redux/actions/gridActions'
-import { incMovesAction } from '../../redux/actions/gameActions'
-
-interface TypeCard {
-  id: string
-  value: number
-  type: string
-}
 
 interface GridProps {
-  grid: Array<Array<TypeCard>>
-  onClick: (card: TypeCard) => void
+  grid: Grid
+  onClick: (card: ICard) => void
 }
 
 const Grid: React.FC<GridProps> = ({ grid, onClick }) => {
-  const cardOnClick = (card: TypeCard) => {
+  const cardOnClick = (card: ICard) => {
     onClick(card)
   }
 

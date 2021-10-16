@@ -17,15 +17,11 @@ const newGameAction = () => ({
 const incMovesAction = () => ({
   type: 'INC_MOVES',
 })
-const incTimeAction = () => ({
-  type: 'INC_TIME',
-})
 
 export {
   startGameAction,
-  incMovesAction,
-  incTimeAction,
   endGameAction,
-  restartGameAction,
   newGameAction,
+  restartGameAction,
+  incMovesAction,
 }

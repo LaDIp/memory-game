@@ -1,10 +1,8 @@
 import React from 'react'
 import style from './style.module.scss'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { incTimeAction } from '../../redux/actions/gameActions'
 
-interface GameStatProps {
-  game: Object;
+type GameStatProps = {
+  game: Object,
 }
 
 const GameStat: React.FC<GameStatProps> = ({ game }) => {

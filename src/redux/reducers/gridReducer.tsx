@@ -1,13 +1,4 @@
-import { AnyAction } from 'redux'
-import { Card } from '../../components'
-
-interface TypeCard {
-  id: string
-  value: number | string
-  type: string
-}
-
-type gridState = Array<Array<TypeCard>>
+import { gridState, GridActionTypes, GridAction } from '../types/gridTypes'
 
 const defaultState: gridState = []
 
@@ -46,11 +37,11 @@ const icons: Array<string> = [
   'vpn_key', //32
 ]
 
-const gridReducer = (state = defaultState, action: AnyAction): gridState => {
+const gridReducer = (state = defaultState, action: GridAction): gridState => {
   switch (action.type) {
-    case 'GENERATE_GRID':
+    case GridActionTypes.GENERATE_GRID:
       const typeCard = action.payload.typeCards
-      const size = +action.payload.gridSize
+      const size = action.payload.size
       let values: Array<number | string> = Array((size * size) / 2).fill(0)
       if (typeCard === 'Numbers') values = values.map((item, index) => index)
       if (typeCard === 'Icons') {
@@ -75,9 +66,9 @@ const gridReducer = (state = defaultState, action: AnyAction): gridState => {
       }
       console.log(grid)
       return grid
-    case 'RESET_GRID':
+    case GridActionTypes.RESET_GRID:
       return defaultState
-    case 'COMPARE_CARD':
+    case GridActionTypes.COMPARE_CARD:
       console.log(action.payload)
       return state.map((row) =>
         row.map((card) => {
@@ -93,17 +84,10 @@ const gridReducer = (state = defaultState, action: AnyAction): gridState => {
           return card
         }),
       )
-    case 'FLIP_CARD':
+    case GridActionTypes.FLIP_CARD:
       return state.map((row) =>
         row.map((card) => {
           if (card.id === action.payload.id) card.type = 'flip'
-          return card
-        }),
-      )
-    case 'UNFLIP_CARD':
-      return state.map((row) =>
-        row.map((card) => {
-          if (card.id === action.payload.id) card.type = 'hide'
           return card
         }),
       )

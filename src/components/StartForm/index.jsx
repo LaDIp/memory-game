@@ -1,18 +1,8 @@
 import React from 'react'
-import { useAppDispatch } from '../../hooks'
-import {
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-} from 'formik'
-import { startGameAction } from '../../redux/actions/gameActions'
-import { generateGridAction } from '../../redux/actions/gridActions'
+import { useActions } from '../../hooks'
+import { Formik, Form, Field } from 'formik'
 import style from './style.module.scss'
 import classNames from 'classnames'
-import { spawn } from 'child_process'
 
 interface StartFormValues {
   typeCards: string;
@@ -20,15 +10,15 @@ interface StartFormValues {
 }
 
 function StartGame() {
-  const initialValues: StartFormValues = { typeCards: 'Numbers', gridSize: '4' }
-  const dispatch = useAppDispatch()
+  const initialValues: StartFormValues = { typeCards: 'Numbers', size: '4' }
+  const { startGameAction, generateGridAction } = useActions()
   return (
     <div className={style.form}>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
-          dispatch(startGameAction(values))
-          dispatch(generateGridAction(values))
+          startGameAction(values)
+          generateGridAction(values)
           actions.setSubmitting(false)
         }}
       >
@@ -47,15 +37,15 @@ function StartGame() {
           <div className={style.radioGroup}>
             <h4 className={style.radioGroup__head}>Select size</h4>
             <label className={classNames(style.button, style.button_radio)}>
-              <Field type='radio' name='gridSize' value='4' />
+              <Field type='radio' name='size' value='4' />
               <span>4x4</span>
             </label>
             <label className={classNames(style.button, style.button_radio)}>
-              <Field type='radio' name='gridSize' value='6' />
+              <Field type='radio' name='size' value='6' />
               <span>6x6</span>
             </label>
             <label className={classNames(style.button, style.button_radio)}>
-              <Field type='radio' name='gridSize' value='8' />
+              <Field type='radio' name='size' value='8' />
               <span>8x8</span>
             </label>
           </div>

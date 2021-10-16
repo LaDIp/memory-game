@@ -1,26 +1,18 @@
 import classNames from 'classnames'
 import React, { MouseEvent } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { flipCardAction } from '../../redux/actions/gridActions'
-import type { RootState } from '../../redux/store'
+import { useActions } from '../../hooks'
 import style from './style.module.scss'
 
-interface TypeCard {
-  id: string
-  value: number
-  type: string
-}
-
-interface CardProps {
-  card: TypeCard
-  onClick: (card: TypeCard) => void
+type CardProps = {
+  card: ICard
+  onClick: (card: ICard) => void
 }
 
 function Card({ card, onClick }: CardProps) {
-  const dispatch = useAppDispatch()
+  const { flipCardAction } = useActions()
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     if (card.type === 'hide') {
-      dispatch(flipCardAction(card))
+      flipCardAction(card)
       onClick(card)
     }
   }

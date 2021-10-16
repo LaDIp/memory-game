@@ -1,40 +1,34 @@
 import React from 'react'
 import { Game, StartForm } from './components'
-import { useAppDispatch, useAppSelector } from './hooks'
-import { generateGridAction } from './redux/actions/gridActions'
+import { useActions, useAppSelector } from './hooks'
 import { RootState } from './redux/store'
 import style from './App.module.scss'
 import classNames from 'classnames'
-import {
-  endGameAction,
-  newGameAction,
-  restartGameAction,
-  startGameAction,
-} from './redux/actions/gameActions'
 
 function App() {
   const grid = useAppSelector((state: RootState) => state.grid)
   const game = useAppSelector((state: RootState) => state.game)
-  const dispatch = useAppDispatch()
+  const {
+    restartGameAction,
+    generateGridAction,
+    startGameAction,
+    newGameAction,
+  } = useActions()
 
   const handleRestart = () => {
-    dispatch(restartGameAction())
-    dispatch(
-      generateGridAction({
-        typeCards: game.typeCards,
-        gridSize: Math.sqrt(game.size),
-      }),
-    )
-    dispatch(
-      startGameAction({
-        typeCards: game.typeCards,
-        gridSize: Math.sqrt(game.size),
-      }),
-    )
+    restartGameAction()
+    generateGridAction({
+      typeCards: game.typeCards,
+      size: Math.sqrt(game.size),
+    })
+    startGameAction({
+      typeCards: game.typeCards,
+      size: Math.sqrt(game.size),
+    })
   }
 
   const handleNewGame = () => {
-    dispatch(newGameAction())
+    newGameAction()
   }
 
   return (
