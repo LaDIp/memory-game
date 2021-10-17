@@ -1,4 +1,4 @@
-export interface gameState {
+export type gameState = {
   isStart: boolean
   isEnd: boolean
   restart: number
@@ -16,7 +16,7 @@ export enum GameActionTypes {
   INC_MOVES = 'INC_MOVES',
 }
 
-interface startGameAction {
+type startGameAction = {
   type: GameActionTypes.START_GAME
   payload: {
     typeCards: string
@@ -24,19 +24,19 @@ interface startGameAction {
   }
 }
 
-interface endGameAction {
+type endGameAction = {
   type: GameActionTypes.END_GAME
 }
 
-interface newGameAction {
+type newGameAction = {
   type: GameActionTypes.NEW_GAME
 }
 
-interface restartGameAction {
+type restartGameAction = {
   type: GameActionTypes.RESTART_GAME
 }
 
-interface incMovesAction {
+type incMovesAction = {
   type: GameActionTypes.INC_MOVES
 }
 

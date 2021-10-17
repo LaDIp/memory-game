@@ -2,13 +2,13 @@ import React from 'react'
 import style from './style.module.scss'
 import { Card } from '..'
 
-interface GridProps {
+type GridProps = {
   grid: Grid
-  onClick: (card: ICard) => void
+  onClick: (card: Card) => void
 }
 
-const Grid: React.FC<GridProps> = ({ grid, onClick }) => {
-  const cardOnClick = (card: ICard) => {
+function Grid({ grid, onClick }: GridProps) {
+  const cardOnClick = (card: Card) => {
     onClick(card)
   }
 

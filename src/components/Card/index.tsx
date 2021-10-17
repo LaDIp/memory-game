@@ -4,8 +4,8 @@ import { useActions } from '../../hooks'
 import style from './style.module.scss'
 
 type CardProps = {
-  card: ICard
-  onClick: (card: ICard) => void
+  card: Card
+  onClick: (card: Card) => void
 }
 
 function Card({ card, onClick }: CardProps) {

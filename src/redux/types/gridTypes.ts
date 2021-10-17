@@ -7,7 +7,7 @@ export enum GridActionTypes {
   FLIP_CARD = 'FLIP_CARD',
 }
 
-interface generateGridAction {
+type generateGridAction = {
   type: GridActionTypes.GENERATE_GRID
   payload: {
     typeCards: string
@@ -15,18 +15,18 @@ interface generateGridAction {
   }
 }
 
-interface resetGridAction {
+type resetGridAction = {
   type: GridActionTypes.RESET_GRID
 }
 
-interface compareCardAction {
+type compareCardAction = {
   type: GridActionTypes.COMPARE_CARD
-  payload: Array<ICard>
+  payload: Array<Card>
 }
 
-interface flipCardAction {
+type flipCardAction = {
   type: GridActionTypes.FLIP_CARD
-  payload: ICard
+  payload: Card
 }
 
 export type GridAction =

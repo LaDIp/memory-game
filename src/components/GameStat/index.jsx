@@ -5,7 +5,7 @@ type GameStatProps = {
   game: Object,
 }
 
-const GameStat: React.FC<GameStatProps> = ({ game }) => {
+function GameStat({ game }: GameStatProps) {
   const [time, setTime] = React.useState(0)
   React.useEffect(() => {
     let interval = setInterval(() => setTime((time) => time + 1), 1000)

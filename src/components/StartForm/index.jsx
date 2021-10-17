@@ -4,9 +4,9 @@ import { Formik, Form, Field } from 'formik'
 import style from './style.module.scss'
 import classNames from 'classnames'
 
-interface StartFormValues {
-  typeCards: string;
-  gridSize: numbers;
+type StartFormValues = {
+  typeCards: string,
+  gridSize: numbers,
 }
 
 function StartGame() {

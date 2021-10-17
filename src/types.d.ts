@@ -1,4 +1,4 @@
-interface ICard {
+type Card = {
   id: string
   value: number | string
   type: string

@@ -9,7 +9,7 @@ type GameProps = {
   grid: Grid,
 }
 
-const Game: React.FC<GameProps> = ({ game, grid }) => {
+function Game({ game, grid }: GameProps) {
   const [flippedCards, setFlippedCards] = React.useState([])
   const [openedCard, setOpenedCard] = React.useState(0)
   const { incMovesAction, compareCardAction, endGameAction } = useActions()
