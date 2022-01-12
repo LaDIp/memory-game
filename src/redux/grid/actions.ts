@@ -5,11 +5,11 @@ const generateGridAction = (payload: Object) => ({
 const resetGridAction = () => ({
   type: 'RESET_GRID',
 })
-const compareCardAction = (payload: Array<ICard>) => ({
+const compareCardAction = (payload: Array<Card>) => ({
   type: 'COMPARE_CARD',
   payload,
 })
-const flipCardAction = (payload: ICard) => ({
+const flipCardAction = (payload: Card) => ({
   type: 'FLIP_CARD',
   payload,
 })

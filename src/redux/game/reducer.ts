@@ -1,4 +1,4 @@
-import { gameState, GameActionTypes, GameAction } from '../types/gameTypes'
+import { gameState, GameActionTypes, GameAction } from './types'
 
 const defaultState: gameState = {
   isStart: false,
@@ -6,8 +6,6 @@ const defaultState: gameState = {
   restart: 0,
   typeCards: '',
   size: 4,
-  moves: 0,
-  openedCard: 0,
 }
 
 const gameReducer = (state = defaultState, action: GameAction): gameState => {
@@ -18,9 +16,7 @@ const gameReducer = (state = defaultState, action: GameAction): gameState => {
         isStart: true,
         isEnd: false,
         typeCards: action.payload.typeCards,
-        size: Number(action.payload.size) * Number(action.payload.size),
-        moves: 0,
-        openedCard: 0,
+        size: Number(action.payload.size),
       }
     case GameActionTypes.END_GAME:
       return { ...state, isEnd: true }
@@ -28,8 +24,6 @@ const gameReducer = (state = defaultState, action: GameAction): gameState => {
       return defaultState
     case GameActionTypes.RESTART_GAME:
       return { ...state, restart: state.restart + 1 }
-    case GameActionTypes.INC_MOVES:
-      return { ...state, moves: state.moves + 1 }
     default:
       return state
   }

@@ -1,6 +1,97 @@
-import { gridState, GridActionTypes, GridAction } from '../types/gridTypes'
+import { gridState, GridActionTypes, GridAction } from './types'
 
 const defaultState: gridState = []
+
+// [
+//   [
+//     {
+//       id: '0.7858471527056572',
+//       value: 7,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.11494344886181285',
+//       value: 2,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.03633998196950383',
+//       value: 0,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.958677635198139',
+//       value: 3,
+//       type: 'hide',
+//     },
+//   ],
+//   [
+//     {
+//       id: '0.1120130869292919',
+//       value: 1,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.19619272462817117',
+//       value: 6,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.21643568295450422',
+//       value: 1,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.8562875829599121',
+//       value: 7,
+//       type: 'hide',
+//     },
+//   ],
+//   [
+//     {
+//       id: '0.5786707962366746',
+//       value: 5,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.8094037175821986',
+//       value: 5,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.42558076600130423',
+//       value: 0,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.13884502663269105',
+//       value: 3,
+//       type: 'hide',
+//     },
+//   ],
+//   [
+//     {
+//       id: '0.02583876712921751',
+//       value: 4,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.5655253780138341',
+//       value: 4,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.12995043177982923',
+//       value: 6,
+//       type: 'hide',
+//     },
+//     {
+//       id: '0.008815643390182037',
+//       value: 2,
+//       type: 'hide',
+//     },
+//   ],
+// ]
 
 const icons: Array<string> = [
   'favorite_border',
@@ -73,12 +164,16 @@ const gridReducer = (state = defaultState, action: GridAction): gridState => {
       return state.map((row) =>
         row.map((card) => {
           if (action.payload[0].value === action.payload[1].value) {
-            if (card.id === action.payload[0].id) card.type = 'open'
-            if (card.id === action.payload[1].id) card.type = 'open'
+            if (card.id === action.payload[0].id)
+              return { ...card, type: 'open' }
+            if (card.id === action.payload[1].id)
+              return { ...card, type: 'open' }
           } else {
             if (action.payload.length === 3) {
-              if (card.id === action.payload[0].id) card.type = 'hide'
-              if (card.id === action.payload[1].id) card.type = 'hide'
+              if (card.id === action.payload[0].id)
+                return { ...card, type: 'hide' }
+              if (card.id === action.payload[1].id)
+                return { ...card, type: 'hide' }
             }
           }
           return card
@@ -87,7 +182,7 @@ const gridReducer = (state = defaultState, action: GridAction): gridState => {
     case GridActionTypes.FLIP_CARD:
       return state.map((row) =>
         row.map((card) => {
-          if (card.id === action.payload.id) card.type = 'flip'
+          if (card.id === action.payload.id) return { ...card, type: 'flip' }
           return card
         }),
       )

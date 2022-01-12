@@ -1,12 +1,12 @@
 import React from 'react'
-import { Game, StartForm } from './components'
 import { useActions, useAppSelector } from './hooks'
 import { RootState } from './redux/store'
 import style from './App.module.scss'
 import classNames from 'classnames'
+import Game from './components/Game'
+import StartForm from './components/StartForm'
 
 function App() {
-  const grid = useAppSelector((state: RootState) => state.grid)
   const game = useAppSelector((state: RootState) => state.game)
   const {
     restartGameAction,
@@ -19,11 +19,11 @@ function App() {
     restartGameAction()
     generateGridAction({
       typeCards: game.typeCards,
-      size: Math.sqrt(game.size),
+      size: game.size,
     })
     startGameAction({
       typeCards: game.typeCards,
-      size: Math.sqrt(game.size),
+      size: game.size,
     })
   }
 
@@ -54,7 +54,7 @@ function App() {
           )}
         </header>
         <main className={style.main}>
-          {game.isStart ? <Game game={game} grid={grid} /> : <StartForm />}
+          {game.isStart ? <Game game={game} /> : <StartForm />}
           {game.isEnd && <span className={style.gameover}>GAME OVER</span>}
         </main>
       </div>

@@ -4,4 +4,12 @@ type Card = {
   type: string
 }
 
-type Grid = Array<Array<ICard>>
+type Grid = Array<Array<Card>>
+
+type Game = {
+  isStart: boolean
+  isEnd: boolean
+  restart: number
+  typeCards: string
+  size: number
+}

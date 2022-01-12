@@ -16,6 +16,7 @@ function Card({ card, onClick }: CardProps) {
       onClick(card)
     }
   }
+
   return (
     <div
       className={classNames(style.card, {
@@ -41,4 +42,4 @@ function Card({ card, onClick }: CardProps) {
   )
 }
 
-export default Card
+export default React.memo(Card, (prev, next) => prev.card === next.card)

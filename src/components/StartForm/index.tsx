@@ -5,11 +5,11 @@ import style from './style.module.scss'
 import classNames from 'classnames'
 
 type StartFormValues = {
-  typeCards: string,
-  gridSize: numbers,
+  typeCards: string
+  size: string
 }
 
-function StartGame() {
+function StartForm() {
   const initialValues: StartFormValues = { typeCards: 'Numbers', size: '4' }
   const { startGameAction, generateGridAction } = useActions()
   return (
@@ -61,4 +61,4 @@ function StartGame() {
   )
 }
 
-export default StartGame
+export default StartForm

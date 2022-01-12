@@ -1,12 +1,4 @@
-export type gameState = {
-  isStart: boolean
-  isEnd: boolean
-  restart: number
-  typeCards: string
-  size: number
-  moves: number
-  openedCard: number
-}
+export type gameState = Game
 
 export enum GameActionTypes {
   START_GAME = 'START_GAME',

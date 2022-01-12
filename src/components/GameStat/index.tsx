@@ -2,11 +2,13 @@ import React from 'react'
 import style from './style.module.scss'
 
 type GameStatProps = {
-  game: Object,
+  game: Game
+  moves: number
 }
 
-function GameStat({ game }: GameStatProps) {
+function GameStat({ game, moves }: GameStatProps) {
   const [time, setTime] = React.useState(0)
+
   React.useEffect(() => {
     let interval = setInterval(() => setTime((time) => time + 1), 1000)
     if (game.isEnd) clearInterval(interval)
@@ -23,7 +25,7 @@ function GameStat({ game }: GameStatProps) {
     <div className={style.stat}>
       <div className={style.plate}>
         <p className={style.plate__title}>Moves</p>
-        <p className={style.plate__text}>{game.moves}</p>
+        <p className={style.plate__text}>{moves}</p>
       </div>
       <div className={style.plate}>
         <p className={style.plate__title}>Time</p>

@@ -1,5 +1,0 @@
-export { default as Card } from './Card'
-export { default as Grid } from './Grid'
-export { default as StartForm } from './StartForm'
-export { default as Game } from './Game'
-export { default as GameStat } from './GameStat'
