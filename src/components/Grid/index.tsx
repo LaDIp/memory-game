@@ -8,33 +8,32 @@ type GridProps = {
   onClick: (card: Card) => void
 }
 
-let flippedCards: Array<Card> = []
-let openedCards = 0
-
 function Grid({ onClick }: GridProps) {
+  const flippedCards = React.useRef<Array<Card>>([])
+  const openedCards = React.useRef(0)
   const grid = useAppSelector((state: RootState) => state.grid)
 
   const { compareCardAction, endGameAction } = useActions()
 
   const handleCardClick = (card: Card) => {
     onClick(card)
-    flippedCards.push(card)
-    if (flippedCards.length === 2) {
-      compareCardAction(flippedCards)
-      if (flippedCards[0].value === flippedCards[1].value) {
-        console.log(openedCards + 1, grid.length * 2)
-        if (openedCards + 1 === grid.length * 2) {
+    flippedCards.current.push(card)
+    if (flippedCards.current.length === 2) {
+      compareCardAction(flippedCards.current)
+      if (flippedCards.current[0].value === flippedCards.current[1].value) {
+        console.log(openedCards.current + 1, grid.length * 2)
+        if (openedCards.current + 1 === grid.length * 2) {
           endGameAction()
-          openedCards = 0
+          openedCards.current = 0
         } else {
-          openedCards = openedCards + 1
+          openedCards.current = openedCards.current + 1
         }
       }
     }
-    if (flippedCards.length === 3) {
-      compareCardAction(flippedCards)
-      flippedCards.shift()
-      flippedCards.shift()
+    if (flippedCards.current.length === 3) {
+      compareCardAction(flippedCards.current)
+      flippedCards.current.shift()
+      flippedCards.current.shift()
     }
   }
 
